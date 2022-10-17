@@ -1,0 +1,35 @@
+<form class="content_container" action="/register" method="post">
+    <label for="first_name">First Name:</label>
+    <input type="text" name="first_name" id="first_name" />
+    {% for message in get_flashed_messages(category_filter=['err_first_name_registration']) %}
+    <p class="alert alert-danger">{{ message }}</p>
+    {% endfor %}
+
+    <label for="last_name">Last Name:</label>
+    <input type="text" name="last_name" id="last_name" />
+    {% for message in get_flashed_messages(category_filter=['err_last_name_registration']) %}
+    <p class="alert alert-danger">{{ message }}</p>
+    {% endfor %}
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" />
+    {% for message in get_flashed_messages(category_filter=['err_email_registration']) %}
+    <p class="alert alert-danger">{{ message }}</p>
+    {% endfor %}
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" />
+    {% for message in get_flashed_messages(category_filter=['err_password_registration']) %}
+    <p class="alert alert-danger">{{ message }}</p>
+    {% endfor %}
+
+    <label for="confirmation_password">Confirm Password</label>
+    <input type="password" id="confirmation_password" name="confirmation_password" />
+    {% for message in get_flashed_messages(category_filter=['err_confirmation_password_registration']) %}
+    <p class="alert alert-danger">{{ message }}</p>
+    {% endfor %}
+
+    <div class="submit-container">
+        <input type="submit" value="Register" id="submitButton" />
+    </div>
+</form>

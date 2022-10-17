@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta species="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Text Parser</title>
+</head>
+
+<body>
+    <nav>
+        {% block navbar %}
+        <div class="col nav_left">
+            <h1 class="nav_title">Text Parser</h1>
+        </div>
+        <div class="col nav_right">
+            {% if 'uuid' in session: %}
+            <a href="/logout">Logout</a>
+            {% else: %}
+            <a href="/login">Login</a>
+            {% endif %}
+        </div>
+
+        {% endblock navbar %}
+    </nav>
+
+    <main>
+        {% with messages = get_flashed_messages() %}{% endwith %}
+        {% block body%}
+        {% endblock body%}
+    </main>
+    <footer>
+        {% block footer %}
+        <div class="col footer_left">
+        </div>
+        <div class="col footer_right">
+            <a href="https://github.com/gamadjg">Github Icon</a>
+            <a href="https://www.linkedin.com/in/gamadavid/">LinkedIn Icon</a>
+        </div>
+        {% endblock footer %}
+    </footer>
+
+
+</body>
+
+</html>

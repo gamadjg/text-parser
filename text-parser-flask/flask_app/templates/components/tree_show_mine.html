@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block navbar %}
+<div class="col nav_left">
+    <h1 class="nav_title">Arbortrary
+    </h1>
+    <p>A site to track randomly planted Trees</p>
+</div>
+<div class="col nav_right">
+    <h1 class="nav_title">Welcome {{user.first_name}}</h1>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/logout"><button>Logout</button></a>
+</div>
+{% endblock navbar %}
+
+{% block body%}
+<div class="col left">
+    <p class="subtext">My Trees</p>
+    <table class="table">
+        <tbody class=band_container>
+            {% if user.trees_list != []: %}
+            {% for tree in user.trees_list:%}
+            <tr class="tree_row">
+                <td class="my_tree_row">
+                    <p>{{tree.species}}</p>
+                    <p>{{tree.date_planted}}</p>
+
+                    <div>
+                        <a href="/edit/{{tree.id}}">edit</a>
+                        <a href="/delete/{{tree.id}}">delete</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock body%}
