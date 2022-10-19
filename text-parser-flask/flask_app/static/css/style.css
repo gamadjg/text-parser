@@ -11,9 +11,10 @@ body {
 nav,
 footer {
 	width: 100%;
-	background-color: antiquewhite;
+	background-color: grey;
 	display: flex;
 	align-items: center;
+	color: white;
 }
 
 body {
@@ -22,13 +23,21 @@ body {
 }
 
 main {
+	width: 1000px;
+	margin: 10px auto;
 	flex: 1 0 auto;
 }
 
 footer {
 	flex-shrink: 0;
 	height: 50px;
-	background-color: antiquewhite;
+	background-color: grey;
+}
+
+a,
+a:hover {
+	text-decoration: none;
+	color: white;
 }
 
 .nav_right,
