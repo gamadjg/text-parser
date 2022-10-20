@@ -1,6 +1,7 @@
 * {
 	margin: 0;
 	padding: 0;
+	font-family: monospace;
 }
 
 html,
@@ -11,15 +12,22 @@ body {
 nav,
 footer {
 	width: 100%;
+	margin: 0 auto;
+	padding: 0 50px;
 	background-color: grey;
+	color: white;
 	display: flex;
 	align-items: center;
-	color: white;
+	justify-content: space-between;
 }
 
 body {
 	display: flex;
 	flex-direction: column;
+}
+
+label {
+	margin: 0 0 0 0;
 }
 
 main {
@@ -40,10 +48,107 @@ a:hover {
 	color: white;
 }
 
+button {
+	padding: 5px 10px;
+}
+
+th {
+	padding: 6px;
+}
+
 .nav_right,
 .footer_right {
 	display: flex;
+	flex-direction: row;
 	align-items: flex-end;
 	justify-content: end;
 	gap: 20px;
+}
+
+.nav_title {
+	font-size: xx-large;
+}
+
+.banner {
+	margin: 10px auto;
+	width: 600px;
+}
+
+.subtext {
+	font-size: x-large;
+	margin: 0;
+}
+
+.show_container {
+	padding: 10px;
+}
+
+.title {
+	font-size: xx-large;
+}
+
+.poster {
+	font-size: x-large;
+}
+.large {
+	font-size: xx-large;
+}
+
+.col {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 10px;
+}
+
+.content_container {
+	width: 500px;
+	margin: 0 auto;
+}
+
+.dashboard_container {
+	width: 100%;
+	margin: 0 auto;
+}
+
+#similarity-header,
+#similarity-data {
+	width: 110px;
+	text-align: center;
+}
+
+#analyzer-header,
+#analyzer-data {
+	width: 90px;
+	text-align: center;
+}
+
+#text-1-header,
+#text-1-data,
+#text-2-header,
+#text-2-data {
+	width: 400px;
+}
+
+.alert {
+	margin: 5px 0 0 0;
+}
+
+#submitButton {
+	padding: 0px 10px;
+}
+
+#comment {
+	min-width: 200px;
+	min-height: 15px;
+}
+
+#commentResult {
+	word-break: break-all;
+	white-space: normal;
+}
+
+.form-title {
+	font-size: x-large;
+	text-decoration: underline;
 }

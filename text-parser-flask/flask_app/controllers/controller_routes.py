@@ -1,11 +1,15 @@
-from xml.etree.ElementTree import tostring
-from flask_app import app, jaccard_similarity
+from flask_app import app
 from flask import render_template, redirect, request
+from flask_app.middleware import (
+    calculate_jaccard,
+    calculate_euclidean,
+    calculate_cosine,
+)
 
 
 @app.route("/")
 def home():
-    return render_template("components/home.html", result=0)
+    return render_template("components/landing.html", result=0)
 
 
 @app.route("/input", methods=["GET"])
@@ -17,16 +21,25 @@ def input_text():
     print(comparator, text1, text2)
 
     result = 0
-    if comparator == "jaccard":
-        result = jaccard_similarity(text1, text2)
-        print(result)
-        return str(result)
+
+    match comparator:
+        case "jaccard":
+            result = calculate_jaccard.jaccard_similarity(text1, text2)
+            print("jaccard: " + str(result))
+            return str(result)
+        case "euclidean":
+            result = calculate_euclidean.euclidean_similarity(text1, text2)
+            print("euclidean: " + result)
+            return str(result)
+        case "cosine":
+            visualize = calculate_cosine.find_cosine_similarity(text1, text2)
+            # print("cosine: " + result)
+            return render_template("components/landing.html", visualize=visualize)
+    # if comparator == "jaccard":
+    #     result = jaccard_similarity(text1, text2)
+    #     # print(result)
+    #     return str(result)
     return result
-
-
-@app.route("/login")
-def login():
-    return render_template("components/login.html")
 
     # for val in request.args:
     #     print(val)

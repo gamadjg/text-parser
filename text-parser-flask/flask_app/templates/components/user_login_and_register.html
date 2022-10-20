@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block navbar %}
+
+{% endblock navbar %}
+
+{% block body%}
+<div class="col main">
+    <div class="title">Register</div>
+    {% include '/components/registration_form.html' %}
+</div>
+<div class="col main">
+    <div class="title">Login</div>
+    {% include '/components/login_form.html' %}
+</div>
+{% endblock body%}

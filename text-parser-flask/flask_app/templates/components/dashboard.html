@@ -1,16 +1,13 @@
 {% extends 'layout.html' %}
 
 {% block navbar %}
-<div class="col nav_left">
-    <h1 class="nav_title">Arbortrary
-    </h1>
-    <p>A site to track randomly planted Trees</p>
+<div class="nav_left">
+    <h1 class="nav_title">Text Parser</h1>
 </div>
-<div class="col nav_right">
-    <h1 class="nav_title">Welcome {{user.first_name}}</h1>
-    <a href="/user/account">My Trees</a>
-    <a href="/new/tree">Plant a tree</a>
-    <a href="/logout"><button>Logout</button></a>
+<div class="nav_right">
+    <a href="/">Home</a>
+    <a href="/user/dashboard">Dashboard</a>
+    <a href="/logout">Logout</a>
 </div>
 
 {% endblock navbar %}
@@ -22,25 +19,30 @@
 
 
 {% block body%}
-<table class="table">
-    <thead>
-        <th>Species</th>
-        <th>Planted By</th>
-        <th>Visitors</th>
-        <th>Actions</th>
-    </thead>
-
-    <tbody class=tree_container>
-        {% for tree in trees:%}
-        <tr class="tree_row">
-            <td>{{tree.species}}</td>
-            <td>{{tree.user.first_name}}</td>
-            <td>{{tree.visitors|length}}
-            </td>
-            <td><a href="/show/{{tree.id}}">details</a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
+<div class="dashboard_container">{{user.first_name}}
+    <table class="table-sm table-striped table-bordered">
+        <thead>
+            <th class="similarity table-header" id="similarity-header">Similarity</th>
+            <th class="analyzer table-header" id="analyzer-header">Analyzer</th>
+            <th class="text-1 table-header" id="text-1-header">Text #1</th>
+            <th class="text-2 table-header" id="text-2-header">Text #2</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="table-data" id="similarity-data">100</td>
+                <td class="table-data" id="analyzer-data">Jaccard</td>
+                <td class="table-data" id="text-1-data">I like turtles</td>
+                <td class="table-data" id="text-2-data">I like turtles</td>
+            </tr>
+            {% for entry in user.submission_list: %}
+            <tr>
+                <td>100</td>
+                <td>Jaccard</td>
+                <td>I like turtles</td>
+                <td>I like turtles</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock body%}

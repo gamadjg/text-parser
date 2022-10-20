@@ -14,16 +14,18 @@
 <body>
     <nav>
         {% block navbar %}
-        <div class="col nav_left">
+        <div class="nav_left">
             <h1 class="nav_title">Text Parser</h1>
         </div>
-        <div class="col nav_right">
+        <div class="nav_right">
             {% if 'uuid' in session: %}
+            <a href="/">Home</a>
+            <a href="/user/dashboard">Dashboard</a>
             <a href="/logout">Logout</a>
             {% else: %}
+            <a href="/">Home</a>
             <a href="/login">Login</a>
             <a href="/register">Register</a>
-
             {% endif %}
         </div>
 
@@ -38,9 +40,9 @@
     </main>
     <footer>
         {% block footer %}
-        <div class="col footer_left">
+        <div class="footer_left">
         </div>
-        <div class="col footer_right">
+        <div class="footer_right">
             <a href="https://github.com/gamadjg">Github Icon</a>
             <a href="https://www.linkedin.com/in/gamadavid/">LinkedIn Icon</a>
         </div>

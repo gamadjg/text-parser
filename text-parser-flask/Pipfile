@@ -6,6 +6,12 @@ name = "pypi"
 [packages]
 flask = "*"
 python-dotenv = "*"
+pymysql = "*"
+flask-bcrypt = "*"
+scikit-learn = "*"
+pandas = "*"
+matplotlib = "*"
+seaborn = "*"
 
 [dev-packages]
 

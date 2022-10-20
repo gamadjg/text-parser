@@ -1,9 +1,10 @@
 from flask import Flask
-from flask_app.middleware.jaccard_distances import jaccard_similarity
-import os
+from flask_bcrypt import Bcrypt
+
+DATABASE = "text_parser_schema"
 
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
 app.secret_key = "L33333333TM3333333111111111111N!"
-# bcrypt = Bcrypt(app)
-DATABASE = os.getenv("DATABASE")
-app.secret_key = os.getenv("SECRET_KEY")
+
+# app.secret_key = os.getenv("SECRET_KEY")
