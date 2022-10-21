@@ -5,18 +5,8 @@ name = "pypi"
 
 [packages]
 flask = "*"
-python-dotenv = "*"
 pymysql = "*"
 flask-bcrypt = "*"
-scikit-learn = "*"
-pandas = "*"
-matplotlib = "*"
-seaborn = "*"
-pyqt5 = "*"
-nltk = "*"
-gensim = "*"
-lemminflect = "*"
-sentence-transformers = {editable = true, path = "./../../scratch/sentence-transformers-master/sentence-transformers-master"}
 
 [dev-packages]
 
