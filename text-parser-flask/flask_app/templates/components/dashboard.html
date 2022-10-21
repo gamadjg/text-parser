@@ -22,24 +22,18 @@
 <div class="dashboard_container">{{user.first_name}}
     <table class="table-sm table-striped table-bordered">
         <thead>
-            <th class="similarity table-header" id="similarity-header">Similarity</th>
             <th class="analyzer table-header" id="analyzer-header">Analyzer</th>
+            <th class="similarity table-header" id="similarity-header">Similarity</th>
             <th class="text-1 table-header" id="text-1-header">Text #1</th>
             <th class="text-2 table-header" id="text-2-header">Text #2</th>
         </thead>
         <tbody>
+            {% for entry in user.comparison_list: %}
             <tr>
-                <td class="table-data" id="similarity-data">100</td>
-                <td class="table-data" id="analyzer-data">Jaccard</td>
-                <td class="table-data" id="text-1-data">I like turtles</td>
-                <td class="table-data" id="text-2-data">I like turtles</td>
-            </tr>
-            {% for entry in user.submission_list: %}
-            <tr>
-                <td>100</td>
-                <td>Jaccard</td>
-                <td>I like turtles</td>
-                <td>I like turtles</td>
+                <td>{{entry.comparator}}</td>
+                <td>{{entry.score}}</td>
+                <td>{{entry.text1}}</td>
+                <td>{{entry.text2}}</td>
             </tr>
             {% endfor %}
         </tbody>

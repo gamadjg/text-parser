@@ -7,7 +7,6 @@
         <select id="similarity_measure" name="similarity_measure" class="form-control">
             <option value="jaccard">Jaccard</option>
             <option value="cosine">Cosine</option>
-            <option value="euclidean">Euclidean</option>
         </select>
     </div>
     <div class="form-group">
@@ -24,10 +23,9 @@
 <div id="result_container">
 
 </div>
-
-{% if plot == 1: %}
-<img src="{{heatmap}}" alt="plot">
-{% endif %}
-
-
 {% endblock body %}
+
+{% block script %}
+<script src="{{url_for('static', filename='js/script.js')}}"></script>
+
+{% endblock script %}

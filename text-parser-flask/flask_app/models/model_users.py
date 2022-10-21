@@ -1,6 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app import DATABASE, bcrypt
 from flask import flash, session
+from flask_app.models import model_document_results
 import re
 
 EMAIL_REGEX = re.compile(r"^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$")
@@ -15,7 +16,7 @@ class User:
         self.password = data["password"]
         self.created_at = data["created_at"]
         self.updated_at = data["updated_at"]
-        self.submission_list = []
+        self.comparison_list = []
 
     @classmethod
     def create(cls, data):
@@ -33,9 +34,25 @@ class User:
 
     @classmethod
     def get_one(cls, data):
-        query = "SELECT * FROM users WHERE users.id = %(id)s;"
+        query = "SELECT * FROM users JOIN document_results ON users.id = document_results.user_id WHERE users.id = %(id)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
         user = User(results[0])
+        print(user)
+        for dict in results:
+            print(dict)
+            comparison_data = {
+                "id": dict["document_results.id"],
+                "comparator": dict["comparator"],
+                "score": dict["score"],
+                "text1": dict["text1"],
+                "text2": dict["text2"],
+                "user_id": dict["user_id"],
+                "created_at": dict["document_results.created_at"],
+                "updated_at": dict["document_results.updated_at"],
+            }
+            user.comparison_list.append(
+                model_document_results.Document_result(comparison_data)
+            )
         return user
 
     @staticmethod

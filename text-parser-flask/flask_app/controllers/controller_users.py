@@ -2,7 +2,7 @@ from flask_app import app, bcrypt
 from flask import redirect, request, session, render_template
 from flask_app.models.model_users import User
 
-
+# -----------------------------------------------------------REGISTER----------------
 @app.route("/register")
 def register_user_show():
     return render_template("components/user_registration.html")
@@ -24,6 +24,7 @@ def create_user_process():
     return redirect("/")
 
 
+# -----------------------------------------------------------LOGIN----------------
 @app.route("/login")
 def login_user_show():
     return render_template("components/user_login.html")
@@ -46,20 +47,12 @@ def user_dashboard_show():
 
 
 # -----------------------------------------------------------ACCOUNT------------------
-
-
 @app.route("/user/account")
 def user_account_show():
     return render_template("components/account.html")
 
 
-# @app.route("/user/account")
-# def show_my_trees():
-#     user = User.get_one({"id": session["uuid"]})
-#     # visitors = User.get_joined_trees({"id": session["uuid"]})
-#     return render_template("components/tree_show_mine.html", user=user)
-
-
+# -----------------------------------------------------------LOGOUT----------------
 @app.route("/logout")
 def logout_user():
     session.pop("uuid")
