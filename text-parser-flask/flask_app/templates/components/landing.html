@@ -25,7 +25,9 @@
 
 </div>
 
-<img src="{{visualize}}">
+{% if plot == 1: %}
+<img src="{{heatmap}}" alt="plot">
+{% endif %}
 
 
 {% endblock body %}

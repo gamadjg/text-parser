@@ -1,7 +1,11 @@
-def jaccard_similarity(x, y):
+def jaccard_similarity(str1, str2):
+    str1 = str1.strip()
+    str2 = str2.strip()
 
-    intersection_cardinality = len(set.intersection(*[set(x), set(y)]))
+    venn_intersection = len(set.intersection(*[set(str1), set(str2)]))
 
-    union_cardinality = len(set.union(*[set(x), set(y)]))
+    venn_union = len(set.union(*[set(str1), set(str2)]))
 
-    return intersection_cardinality / float(union_cardinality)
+    result = venn_intersection / float(venn_union)
+
+    return result * 100

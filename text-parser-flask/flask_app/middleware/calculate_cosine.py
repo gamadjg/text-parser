@@ -1,48 +1,69 @@
-# from spacy import word2vec
-import io
-import base64
-import pandas as pd
-from seaborn import heatmap
-from flask import send_file
-import matplotlib.pyplot as plt
-from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.feature_extraction.text import CountVectorizer
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from distutils.command.clean import clean
+from nltk.tokenize import sent_tokenize, word_tokenize
+from sentence_transformers import SentenceTransformer
+import numpy as np
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+from nltk.tokenize.treebank import TreebankWordDetokenizer
+from math import floor
+
+stop_words = set(stopwords.words("english"))
 
 
-def find_cosine_similarity(text1, text2):
-    headlines = [
-        "Investors unfazed by correction as crypto funds see $154 million inflows",
-        "Bitcoin, Ethereum prices continue descent, but crypto funds see inflows",
-        "The surge in euro area inflation during the pandemic: transitory but with upside risks",
-        "Inflation: why it's temporary and raising interest rates will do more harm than good",
-    ]
-    # common
-    # "Will Cryptocurrency Protect Against Inflation?",
-
-    vectorizer = CountVectorizer()
-    print(vectorizer)
-    X = vectorizer.fit_transform(headlines)
-    arr = X.toarray()
-
-    result = cosine_similarity(arr)
-    print(result)
-    return create_heatmap(cosine_similarity(arr), headlines)
+def sent_tokenize_doc(doc):
+    return sent_tokenize(doc)
 
 
-def create_heatmap(similarity, headlines=[], cmap="YlGnBu"):
-    labels = [headline[:20] for headline in headlines]
-    df = pd.DataFrame(similarity)
-    df.columns = labels
-    df.index = labels
-    fig, ax = plt.subplots(figsize=(5, 5))
-    fig.show()
-    heatmap(df, cmap=cmap)
-    canvas = FigureCanvas(fig)
-    img = io.BytesIO()
-    fig.savefig(img)
-    img.seek(0)
-    return send_file(img, mimetype="img/png")
+def word_tokenize_doc(doc):
+    return word_tokenize(doc)
 
 
-# create_heatmap(cosine_similarity(arr))
+def make_lower(doc):
+    for i, value in enumerate(doc):
+        doc[i] = value.lower()
+    return doc
+
+
+def lower_stopword_removal(doc):
+    filtered_tokens = []
+    for word in doc:
+        if word not in stop_words:
+            filtered_tokens.append(word.lower())
+    return filtered_tokens
+
+
+def lemmatize_doc(doc):
+    wnl = WordNetLemmatizer()
+    lemmatized_tokens = [wnl.lemmatize(w) for w in doc]
+    return lemmatized_tokens
+
+
+def cosine_similarity(sentences):
+    model = SentenceTransformer("sentence-transformers/bert-base-nli-mean-tokens")
+    sentence_embeddings = model.encode(sentences)
+    s = sentence_embeddings
+    return np.dot(s[0], s[1]) / (np.linalg.norm(s[0]) * np.linalg.norm(s[1]))
+
+
+def cosine_prep(str1, str2):
+    print(str1)
+    print(str2)
+    sentences = [str1, str2]
+    for i, sent in enumerate(sentences):
+        sentences[i] = word_tokenize_doc(sent)
+        sentences[i] = lower_stopword_removal(sentences[i])
+        sentences[i] = lemmatize_doc(sentences[i])
+        print(sentences[i])
+        sentences[i] = TreebankWordDetokenizer().detokenize(sentences[i])
+
+    print(sentences[0])
+    print(sentences[1])
+
+    result = cosine_similarity(sentences)
+    return floor(result * 100)
+
+
+# st1 = "I went to the store to buy milk."
+# st2 = "I went shopping for some milk!"
+
+# print(clean_text(st1, st2))
